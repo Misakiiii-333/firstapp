@@ -50,6 +50,37 @@ class Users_model extends CI_Model {
         return $this->db->insert('users', $data);
     }
 
+    public function update_user($user_id)
+    {
+        $data = array(
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'email' => $this->input->post('email')
+        );
+
+        $this->db->where('id', $user_id);
+        return $this->db->update('users', $data);
+    }
+
+    public function get_user($user_id)
+    {
+        $query = $this->db->where('id', $user_id)->get('users');
+        return $query->row();
+    }
+    public function delete_user($user_id)
+    {
+        return $this->db->where('id', $user_id)->delete('users');
+        /**
+         * データを削除するために、以下のクエリを生成して実行します
+         * DELETE FROM users WHERE id = $user_id
+         */
+    }
+
+
+
+
+
+
 
 }
 ?>
