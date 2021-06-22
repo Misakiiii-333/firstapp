@@ -312,4 +312,5 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
+//BOOTSTRAP FILE のロード
 require_once BASEPATH.'core/CodeIgniter.php';

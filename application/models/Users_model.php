@@ -34,13 +34,14 @@ class Users_model extends CI_Model {
         //url_helper.php という名前の URL ヘルパー ファイルをロードする
         $this->load->helper('url');
 
-        //クライアントから送信されたPOSTデータを取得
-        //POSTデータの取得を試みて取得できた場合は、POSTデータを返し、 
-        //取得できなかった場合は、GETデータの取得を試みる。
+        // クライアントから送信されたPOSTデータを取得
+        // POSTデータの取得を試みて取得できた場合は、POSTデータを返し、 
+        // 取得できなかった場合は、GETデータの取得を試みる。
         $data = array(
             'first_name' => $this->input->post('first_name'),
             'last_name' => $this->input->post('last_name'),
-            'email' => $this->input->post('email')
+            'email' => $this->input->post('email'),
+            'phone_number' => $this->input->post('phone_number')
         );
         /**
          * データの追加
@@ -55,18 +56,21 @@ class Users_model extends CI_Model {
         $data = array(
             'first_name' => $this->input->post('first_name'),
             'last_name' => $this->input->post('last_name'),
-            'email' => $this->input->post('email')
+            'email' => $this->input->post('email'),
+            'phone_number' => $this->input->post('phone_number') 
+            
         );
 
         $this->db->where('id', $user_id);
         return $this->db->update('users', $data);
     }
-
+    //現在のユーザーデータを編集フォームに表示する
     public function get_user($user_id)
     {
         $query = $this->db->where('id', $user_id)->get('users');
         return $query->row();
     }
+
     public function delete_user($user_id)
     {
         return $this->db->where('id', $user_id)->delete('users');
@@ -76,11 +80,19 @@ class Users_model extends CI_Model {
          */
     }
 
+    public function delete_users($user_ids)
+    {
+        //
+        // for($i = 0; $i < count($user_ids); $i++){
+        //     $this->db->where('id', $user_ids[$i])->delete('users'); 
+        // }
 
-
-
-
-
-
+        //上のfor文と同じ
+        foreach($user_ids as $user_id){
+            $this->db->where('id', $user_id)->delete('users'); 
+        }
+        
+        return;
+    }
 }
 ?>
