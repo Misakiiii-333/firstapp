@@ -61,21 +61,21 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('first_name', 'First name', 'required');
         $this->form_validation->set_rules('last_name', 'Last name', 'required');
         $this->form_validation->set_rules('email', 'Email', array('required','valid_email'));
-
         // hw1
         //クリックをすると検証用の電話番号のメソッド更新が行われる。
         $this->form_validation->set_rules('phone_number', 'Phone Number', 'numeric'); 
         
-
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('header', $data); 
             $this->load->view('users/update', $data);
             $this->load->view('footer');
         } else {
             $this->users_model->update_user($user_id);
-            redirect(base_url('/'));//ベースURLに移動する
+            redirect(base_url('/'));
         }
     }
+    
+    
     //hw2
     public function detail($user_id) 
     {
