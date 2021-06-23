@@ -55,7 +55,7 @@ class Users extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-
+        $data["user"] = $this->users_model->get_user($user_id);
         $data["page_title"] = "Update User";
         //検証ルールを設定する
         $this->form_validation->set_rules('first_name', 'First name', 'required');
