@@ -3,29 +3,10 @@
         <h1>Update User</h1>
         <!-- バリデータによって戻されたすべてのエラーメッセージを返します。
          メッセージがない場合、空の文字列を返します -->
-        <?php echo validation_errors(); 
-        
-        
-        //update.phpにてURLに記載されたidを受け取る。
-        $user_id = isset($_GET['id']) ? $_GET['id'] : null;
-        //取得したidを基に、userの情報をsqlで取得するためのSQLを用意
-        $sql_query = "SELECT * FROM users WHERE id = $user_id";
-        //DBに接続
-        $connection = new mysqli("localhost:8111","root","","ci_firstapp");
-        // $connection = new mysqli("first_name", "last_name", "email","phone_number");
-        //SQLを実行し、結果をresult内に格納する
-        $result= $connection->query($sql_query)->fetch_array();
-        $connection->close();
-    　　
-        $result = $result->fetch_array();
-
-
-        echo form_open('users/update'.$user['id']);
-        
-        ?>
+        <?php echo validation_errors();   ?>
 
         <!-- <button class="btn btn-outline-primary btn-sm"><a href="<?php //echo site_url("views/users/update.php?id=2"); ?>">update</a></button> -->
-
+        <?php echo form_open('users/update/' . $user->id); ?>
             <div class="form-group">
                 <label for="name">First Name</label>
                 <!-- 現在のユーザーデータをフォームに表示することができます。 -->
